@@ -1,23 +1,40 @@
-﻿namespace Generic
+﻿using System.Runtime.CompilerServices;
+
+namespace Generic
 {
+    //we can not use <,= etc. for comparing generics
+    //we can use system.IComparable for comparing generics
+    public class GenericMaximum<T> where T : IComparable
+    {
+        public void genericmaximumamong3(T first,T second,T third) 
+        {
+            T mx=first;
+            if(mx.CompareTo(second)<0)
+            {
+                mx = second;
+            }
+            if(mx.CompareTo(third)<0)
+            {
+                mx = third;
+            }
+            Console.WriteLine($"maximum among {first}, {second}, {third} is --> {mx}");
+        }
+    }
     internal class Program
     {
         static void Main(string[] args)
         {
             //Console.WriteLine("Hello");
             int[] intarray = { 1, 2, 3, 4, 5, };
-            print<int>(intarray);
             char[] chararray = { 'a', 'b','c','d'};
-            print<char>(chararray);
             double[] doublearray = { 1.1, 2.2, 3.3, 4.4 };
-            print<double>(doublearray);
+            GenericMaximum<int> obj = new GenericMaximum<int>();
+            obj.genericmaximumamong3(11,21,31);
+            GenericMaximum<double> obj1 = new GenericMaximum<double>();
+            obj1.genericmaximumamong3(1.1,2.1,1.9);
+            GenericMaximum<char> obj2 = new GenericMaximum<char>();
+            obj2.genericmaximumamong3('d','b','c');
         }
-        public static void print<T>(T[] array)
-        {
-            foreach(var item in array)
-            {
-                Console.WriteLine(item);
-            }
-        }
+        
     }
 }
