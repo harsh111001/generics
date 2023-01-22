@@ -6,18 +6,19 @@ namespace Generic
     //we can use system.IComparable for comparing generics
     public class GenericMaximum<T> where T : IComparable
     {
-        public void genericmaximumamong3(T first,T second,T third) 
+        public T[] arr;
+        public GenericMaximum(T[] arr)
         {
-            T mx=first;
-            if(mx.CompareTo(second)<0)
-            {
-                mx = second;
-            }
-            if(mx.CompareTo(third)<0)
-            {
-                mx = third;
-            }
-            Console.WriteLine($"maximum among {first}, {second}, {third} is --> {mx}");
+            this.arr = arr;
+        }
+        public void genericmax() 
+        {
+            Array.Sort(this.arr);
+            printMax(arr[arr.Length-1]);
+        }
+        public void printMax(T maximum)
+        {
+            Console.WriteLine($"maximum among all is {maximum}");
         }
     }
     internal class Program
@@ -25,15 +26,15 @@ namespace Generic
         static void Main(string[] args)
         {
             //Console.WriteLine("Hello");
-            int[] intarray = { 1, 2, 3, 4, 5, };
-            char[] chararray = { 'a', 'b','c','d'};
-            double[] doublearray = { 1.1, 2.2, 3.3, 4.4 };
-            GenericMaximum<int> obj = new GenericMaximum<int>();
-            obj.genericmaximumamong3(11,21,31);
-            GenericMaximum<double> obj1 = new GenericMaximum<double>();
-            obj1.genericmaximumamong3(1.1,2.1,1.9);
-            GenericMaximum<char> obj2 = new GenericMaximum<char>();
-            obj2.genericmaximumamong3('d','b','c');
+            int[] intarray = { 11, 20, 301, 4, 51, };
+            char[] chararray = { 'z', 'b','c','d'};
+            double[] doublearray = { 101.1, 20.2, 31.3, 47.4 };
+            GenericMaximum<int> genericmax = new GenericMaximum<int>(intarray);
+            genericmax.genericmax();
+            GenericMaximum<char> genericmaxchar = new GenericMaximum<char>(chararray);
+            genericmaxchar.genericmax();
+            GenericMaximum<double> genericmaxdouble = new GenericMaximum<double>(doublearray);
+            genericmaxdouble.genericmax();
         }
         
     }
